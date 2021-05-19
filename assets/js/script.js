@@ -1,39 +1,95 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
-var upper = "QWERTYUIOPASDFGHJKLZXCVBNM";
-var lower = "qwertyuiopasdfghjklzxcvbnm";
-var number = "1234567890";
-var symbol = "!@#$%^&*(){}[]=<>/,.";
+var genPassword = '';
+var upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+var lower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+var symbol = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "{", "}", "[", "]", "=", "<", ">", "/", ",", "."];
 
-
-
-var pLength = prompt("How many Characters would you like your password to be?");
-
-while (pLength < 8 || pLength > 128) {
-pLength = prompt("Length Must be 8 to 128 Characters. How many Characters would you like your password to be?");
+// Functions
+function chooseLength() {
+  var passwordLength = window.prompt('How many Characters would you like your password to be?')
+  if (passwordLength < 8 || passwordLength > 128){
+    alert('Length Must be 8 to 128 Characters. How many Characters would you like your password to be?')
+  } else {
+    return passwordLength;
+  }
 }
 
-var conUpper = confirm("Do you want to use uppercase letters?");
-var conLower = confirm("Do you want to use to use lowercase letters?");
-var conNum = confirm("Do you want to use to use numbers?");
-var conSymb = confirm("Do you want to use to use special characters?");
+// Selections
+function chooseUppercase() {
+  conUpperCase = window.confirm('Would you like to use uppercase letters?')
+}
 
-while (!(conUpper || conLower || conNum || conSymb)) {
-  alert("You must select at least one character type!");
-  conUpper = confirm("Do you want to use uppercase letters?");
-  conLower = confirm("Do you want to use lowercase letters?");
-  conNum = confirm("Do you want to use numbers?");
-  conSymb = confirm("Do you want to use special characters?");
+function chooseLowercase() {
+  conLowerCase = window.confirm('Would you like to use lowercase letters?')
+}
+
+function chooseNumber() {
+  conNumbers = window.confirm('Would you like to use numbers?')
+}
+
+function chooseSymbol() {
+  conSymbols = window.confirm('Would you like to use special characters?')
+}
+
+// Generating Password
+function upperPass() {
+  genPassword += upper[Math.floor(Math.random() * 26)]
+  console.log(genPassword)
+  return genPassword;
+}
+
+function lowerPass() {
+  genPassword += lower[Math.floor(Math.random() * 26)]
+  return genPassword;
+}
+
+function numberPass(){
+  genPassword += number[Math.floor(Math.random() * 10)];
+  return genPassword;
+}
+
+function symbolPass() {
+  genPassword += symbol[Math.floor(Math.random() * 20)]
+  return genPassword;
+}
+
+function createPassword() {
+  for (i = 0; i < passwordLength; i++){
+    if(conUpperCase === true){
+      upperPass();
+    }
+    if(conLowerCase === true){
+      lowerPass();
+    }
+    if(conNumbers === true){
+      numberPass();
+    }
+    if(conSymbols === true){
+      symbolPass();
+    }
+  }
+}
+
+function makePassword(){
+  createPassword()
+  return genPassword;
+}
+
+function generatePassword(){
+  chooseLength();
+  chooseUppercase();
+  chooseLowercase();
+  chooseNumber();
+  chooseSymbol();
+  return makePassword();
 }
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword(upper, lower, number, symbol, pLength);
+  var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  
-  for (var i = 0, n = generatePassword.length; i < length; ++i) {
-    passwordText += password.charAt(Math.floor(Math.random() * n));
-}
   passwordText.value = password;
 }
 
