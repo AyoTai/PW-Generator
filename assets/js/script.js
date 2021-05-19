@@ -12,8 +12,7 @@ function chooseLength() {
   passwordLength = window.prompt('How many Characters would you like your password to be?')
   if (passwordLength < 8 || passwordLength > 128){
     window.alert('Length Must be 8 to 128 Characters.')
-  } else {
-    return passwordLength;
+    chooseLength()
   }
 }
 
@@ -36,7 +35,7 @@ function chooseSymbol() {
 
 // Generating Password
 function upperPass() {
-  return upper[Math.floor(Math.random() * upper.length)]
+  return upper[Math.floor(Math.random() * upper.length)];
 }
 function lowerPass() {
   return lower[Math.floor(Math.random() * lower.length)];
@@ -50,6 +49,7 @@ function symbolPass() {
 }
 
 function createPassword() {
+  genPassword = '';
   for (i = 0; i < passwordLength; i++){
     var randomChars = [];
     if(conUpperCase === true){
@@ -65,8 +65,10 @@ function createPassword() {
     if(conSymbols === true){
       randomChars.push(symbolPass());
     }
-    // Randomly Choose 1 character from the four choices 
-    genPassword += randomChars[Math.floor(Math.random() * randomChars.length)];
+    // Randomly Choose 1 character from the four choices
+    var result = randomChars[Math.floor(Math.random() * randomChars.length)] 
+    console.log("i = " + i + " ,character = " + result)
+    genPassword += result;
   }
 }
 
