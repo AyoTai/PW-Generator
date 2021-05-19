@@ -8,6 +8,7 @@ var number = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var symbol = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "{", "}", "[", "]", "=", "<", ">", "/", ",", "."];
 
 // Functions
+// Asks user to choose password length between 8 and 128
 function chooseLength() {
   passwordLength = window.prompt('How many Characters would you like your password to be?')
   if (passwordLength < 8 || passwordLength > 128){
@@ -16,7 +17,7 @@ function chooseLength() {
   }
 }
 
-// Selections
+// User Selections
 function chooseUppercase() {
   conUpperCase = window.confirm('Would you like to use uppercase letters?')
 }
@@ -34,12 +35,15 @@ function chooseSymbol() {
 }
 
 // Generating Password
+// Randomly return one from the upper array
 function upperPass() {
   return upper[Math.floor(Math.random() * upper.length)];
 }
+// Randomly return one from the lower array
 function lowerPass() {
   return lower[Math.floor(Math.random() * lower.length)];
 }
+// Randomly return one from the number array
 function numberPass() {
   return number[Math.floor(Math.random() * number.length)];
 }
@@ -52,12 +56,15 @@ function createPassword() {
   genPassword = '';
   for (i = 0; i < passwordLength; i++){
     var randomChars = [];
+    // If user chooses uppercase randomly pick one and add to temporary array
     if(conUpperCase === true){
       randomChars.push(upperPass());
     }
+    // If user chooses lowercase randomly pick one and add to temporary array
     if(conLowerCase === true){
       randomChars.push(lowerPass());
     }
+    // If user chooses numbers randomly pick one and add to temporary array
     if(conNumbers === true){
       randomChars.push(numberPass());
     }
@@ -72,6 +79,7 @@ function createPassword() {
   }
 }
 
+// function to generate password
 function makePassword() {
   createPassword()
   return genPassword;
