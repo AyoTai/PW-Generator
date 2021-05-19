@@ -11,7 +11,7 @@ var symbol = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "{", "}", "[", "
 function chooseLength() {
   passwordLength = window.prompt('How many Characters would you like your password to be?')
   if (passwordLength < 8 || passwordLength > 128){
-    alert('Length Must be 8 to 128 Characters.')
+    window.alert('Length Must be 8 to 128 Characters.')
   } else {
     return passwordLength;
   }
@@ -36,23 +36,17 @@ function chooseSymbol() {
 
 // Generating Password
 function upperPass() {
-  genPassword += upper[Math.floor(Math.random() * 26)]
-  return genPassword;
+  return upper[Math.floor(Math.random() * upper.length)]
 }
-
 function lowerPass() {
-  genPassword += lower[Math.floor(Math.random() * 26)]
-  return genPassword;
+  return lower[Math.floor(Math.random() * lower.length)];
 }
-
 function numberPass() {
-  genPassword += number[Math.floor(Math.random() * 10)]
-  return genPassword;
+  return number[Math.floor(Math.random() * number.length)];
 }
-
+// Randomly return one from the symbol array
 function symbolPass() {
-  genPassword += symbol[Math.floor(Math.random() * 20)]
-  return genPassword;
+  return symbol[Math.floor(Math.random() * number.length)];
 }
 
 function createPassword() {
@@ -67,10 +61,12 @@ function createPassword() {
     if(conNumbers === true){
       randomChars.push(numberPass());
     }
+    // If user chooses symbols randomly pick one and add to temporary array
     if(conSymbols === true){
       randomChars.push(symbolPass());
     }
-    return randomChars[Math.floor(Math.random() * randomChars.length)];
+    // Randomly Choose 1 character from the four choices 
+    genPassword += randomChars[Math.floor(Math.random() * randomChars.length)];
   }
 }
 
